@@ -8,10 +8,9 @@ const User = mongoose.model('User', new mongoose.Schema({
     password: {
         type: String,
         required: false,
-        unique: true
     },
     role: {
-        type: String,
+        type: Number,
         required: true
     },
     bactive: {
