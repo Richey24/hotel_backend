@@ -6,6 +6,8 @@ const loginController = async (req, res) => {
         let validate = user.password === req.body.password
         if (validate) {
             user.password = ""
+            if (user.role === "0") user.role = "Employee"
+            if (user.role === "1") user.role = "Customer"
             res.status(200).json(user)
         } else {
             res.status(201).json({ message: "incorrect password" })

@@ -10,7 +10,7 @@ const User = mongoose.model('User', new mongoose.Schema({
         required: false,
     },
     role: {
-        type: Number,
+        type: String,
         required: true
     },
     bactive: {
