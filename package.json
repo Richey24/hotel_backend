@@ -5,14 +5,13 @@
   "main": "connect.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "pm2 start connect.js"
+    "start": "node connect.js"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
     "express": "^4.18.1",
-    "mongoose": "^6.3.6",
-    "pm2": "^5.2.0"
+    "mongoose": "^6.3.6"
   }
 }
