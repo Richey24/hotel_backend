@@ -6,6 +6,7 @@ const loginController = require('./controller/loginController')
 const app = express()
 
 app.use(express.json())
+const port = process.env.PORT || 5000
 
 const url = "mongodb+srv://richey:Rejoice11@cluster0.uq2iuaj.mongodb.net/hotel?retryWrites=true&w=majority"
 
@@ -15,7 +16,7 @@ const start = () => {
             useNewUrlParser: true,
             useUnifiedTopology: true
         })
-        app.listen(5000, () => console.log('listening at 5000'))
+        app.listen(port, () => console.log(`listening at ${port}`))
     } catch (error) {
         console.log(error);
     }
