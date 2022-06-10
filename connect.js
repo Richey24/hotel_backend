@@ -5,6 +5,10 @@ const registerController = require('./controller/registerController')
 const loginController = require('./controller/loginController')
 const app = express()
 
+
+//dotenv
+dotenv.config({ path: "./.env" });
+
 app.use(express.json())
 
 const url = "mongodb+srv://richey:Rejoice11@cluster0.uq2iuaj.mongodb.net/hotel?retryWrites=true&w=majority"
