@@ -10,6 +10,9 @@ const getAllRoomsController = require("./controller/roomController/getAll");
 const getOneRoomController = require("./controller/roomController/getOne");
 const { promisify } = require("util");
 const jwt = require("jsonwebtoken");
+const getCustomer = require("./controller/getCustomer");
+const deleteCustomer = require("./controller/deleteCustomer");
+const updateCustomer = require("./controller/updateCustomer");
 const app = express();
 
 //dotenv
@@ -53,6 +56,11 @@ app.get("/get/all", async (req, res) => {
     const user = await User.find({});
     res.json(user);
 });
+app.post("/register", registerController);
+app.post("/login", loginController);
+app.get("get/one", getCustomer)
+app.get("/delete/customer", deleteCustomer)
+app.get("/update/customer", updateCustomer)
 
 /// FOR HANDING ROOM CREATION
 const rommRouter = express.Router();
@@ -63,6 +71,4 @@ rommRouter
     .get("/:roomNum", restrict, getOneRoomController)
     .delete("/:roomNum", restrict, deleteRoomController);
 
-app.post("/register", registerController);
-app.post("/login", loginController);
 app.use("/room", rommRouter);
