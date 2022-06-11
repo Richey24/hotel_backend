@@ -38,7 +38,7 @@ const start = () => {
 
 start();
 
-//RESTRICT
+//JWT RESTRICTION
 
 const restrict = async (req, res, next) => {
     try {
@@ -52,6 +52,7 @@ const restrict = async (req, res, next) => {
 };
 
 app.get("/", (req, res) => res.send("hello"));
+//USER ROUTES
 app.get("/get/all", async (req, res) => {
     const user = await User.find({});
     res.json(user);
@@ -59,10 +60,16 @@ app.get("/get/all", async (req, res) => {
 app.post("/register", registerController);
 app.post("/login", loginController);
 app.post("/get/one", getCustomer)
-app.post("/delete/customer", deleteCustomer)
-app.post("/update/customer", updateCustomer)
+app.delete("/delete/customer", deleteCustomer)
+app.put("/update/customer", updateCustomer)
 
-/// FOR HANDING ROOM CREATION
+//ROOM ROUTES
+app.post("/create/room", createRoomController)
+app.get("/get/room", getAllRoomsController)
+app.get("room/:roomNum", getOneRoomController)
+app.delete("room/:roomNum", deleteRoomController)
+
+/// FOR HANDING ROOM CREATION WITH JWT 
 const rommRouter = express.Router();
 
 rommRouter
