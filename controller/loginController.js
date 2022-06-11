@@ -10,10 +10,10 @@ const loginController = async (req, res) => {
       if (user.role === "0") user.role = "Employee";
       if (user.role === "1") user.role = "Customer";
       //signing jwt
-      const token = jwt.sign({ id: user._id }, process.env.TOKEN_KEY, {
-        expiresIn: "90d",
-      });
-      res.status(200).json({ mainUser, token });
+      // const token = jwt.sign({ id: user._id }, process.env.TOKEN_KEY, {
+      //   expiresIn: "90d",
+      // });
+      res.status(200).json(mainUser);
     } else {
       res.status(201).json({ message: "incorrect password" });
     }

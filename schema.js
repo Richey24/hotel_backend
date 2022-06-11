@@ -74,11 +74,39 @@ const Room = mongoose.model(
       type: String,
       required: false,
     },
+    bkId: {
+      type: String,
+      required: false
+    }
   }),
   "room"
+);
+
+const Booking = mongoose.model(
+  "Booking",
+  new mongoose.Schema({
+    checkInDate: {
+      type: Date,
+      required: true
+    },
+    checkOutDate: {
+      type: Date,
+      required: true
+    },
+    roomNum: {
+      type: Number,
+      required: true,
+    },
+    cusId: {
+      type: String,
+      required: true,
+    },
+  }),
+  "booking"
 );
 
 module.exports = {
   User,
   Room,
+  Booking
 };

@@ -13,6 +13,7 @@ const jwt = require("jsonwebtoken");
 const getCustomer = require("./controller/getCustomer");
 const deleteCustomer = require("./controller/deleteCustomer");
 const updateCustomer = require("./controller/updateCustomer");
+const createBookingController = require("./controller/bookingController/createBooking");
 const app = express();
 
 //dotenv
@@ -66,8 +67,11 @@ app.put("/update/customer", updateCustomer)
 //ROOM ROUTES
 app.post("/create/room", createRoomController)
 app.get("/get/room", getAllRoomsController)
-app.get("room/:roomNum", getOneRoomController)
-app.delete("room/:roomNum", deleteRoomController)
+app.get("/room/:roomNum", getOneRoomController)
+app.delete("/room/:roomNum", deleteRoomController)
+
+//BOOKING ROUTES
+app.post("/create/booking", createBookingController)
 
 /// FOR HANDING ROOM CREATION WITH JWT 
 const rommRouter = express.Router();
