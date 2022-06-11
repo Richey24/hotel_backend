@@ -58,7 +58,7 @@ app.get("/get/all", async (req, res) => {
 });
 app.post("/register", registerController);
 app.post("/login", loginController);
-app.post("get/one", getCustomer)
+app.post("/get/one", getCustomer)
 app.post("/delete/customer", deleteCustomer)
 app.post("/update/customer", updateCustomer)
 
