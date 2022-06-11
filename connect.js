@@ -58,9 +58,9 @@ app.get("/get/all", async (req, res) => {
 });
 app.post("/register", registerController);
 app.post("/login", loginController);
-app.get("get/one", getCustomer)
-app.get("/delete/customer", deleteCustomer)
-app.get("/update/customer", updateCustomer)
+app.post("get/one", getCustomer)
+app.post("/delete/customer", deleteCustomer)
+app.post("/update/customer", updateCustomer)
 
 /// FOR HANDING ROOM CREATION
 const rommRouter = express.Router();
