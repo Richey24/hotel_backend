@@ -28,12 +28,15 @@ const start = () => {
 start()
 
 app.get('/', (req, res) => res.send('hello'))
+
 app.get('/get/customer/all', async (req, res) => {
     const user = await User.find({})
     res.json(user)
 })
 
 app.post('/register', registerController)
+
+
 app.post('/login', loginController)
 app.post('/update/customer', updateCustomer)
 app.post('/delete/customer', deleteCustomer)
