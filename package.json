@@ -6,7 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node connect.js",
-    "start:dev": "nodemon connect.js"
+    "dev": "nodemon connect.js"
   },
   "keywords": [],
   "author": "",

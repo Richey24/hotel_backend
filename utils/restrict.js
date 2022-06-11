@@ -1,9 +1,9 @@
 const { promisify } = require("util");
-const User = require("./schema");
-const jwt = require('jsonwebtoken');
+const { User } = require("../schema");
+const jwt = require("jsonwebtoken");
 
-export const checklogged = async (req, res, next) => {
-  console.log(req.headers.token);
+const restrict = async (req, res, next) => {
+  console.log("req.headers.token", req.headers.Authorization);
   try {
     // console.log(req.session)
     const decode = await promisify(jwt.verify)(
@@ -16,3 +16,5 @@ export const checklogged = async (req, res, next) => {
 
   next();
 };
+
+module.exports = restrict;
