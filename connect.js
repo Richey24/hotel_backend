@@ -1,8 +1,8 @@
 const mongoose = require("mongoose");
 const { User } = require("./schema");
 const express = require("express");
-const registerController = require("./controller/registerController");
-const loginController = require("./controller/loginController");
+const registerController = require("./controller/userController/registerController");
+const loginController = require("./controller/userController/loginController");
 const createRoomController = require("./controller/roomController/create");
 const dotenv = require("dotenv");
 const deleteRoomController = require("./controller/roomController/deleteOne");
@@ -10,9 +10,9 @@ const getAllRoomsController = require("./controller/roomController/getAll");
 const getOneRoomController = require("./controller/roomController/getOne");
 const { promisify } = require("util");
 const jwt = require("jsonwebtoken");
-const getCustomer = require("./controller/getCustomer");
-const deleteCustomer = require("./controller/deleteCustomer");
-const updateCustomer = require("./controller/updateCustomer");
+const getCustomer = require("./controller/userController/getCustomer");
+const deleteCustomer = require("./controller/userController/deleteCustomer");
+const updateCustomer = require("./controller/userController/updateCustomer");
 const createBookingController = require("./controller/bookingController/createBooking");
 const app = express();
 
@@ -54,32 +54,31 @@ const restrict = async (req, res, next) => {
 
 app.get("/", (req, res) => res.send("hello"));
 //USER ROUTES
-app.get("/get/all", async (req, res) => {
-    const user = await User.find({});
-    res.json(user);
-});
-app.post("/register", registerController);
-app.post("/login", loginController);
-app.post("/get/one", getCustomer)
-app.delete("/delete/customer", deleteCustomer)
-app.put("/update/customer", updateCustomer)
-
-//ROOM ROUTES
-app.post("/create/room", createRoomController)
-app.get("/get/room", getAllRoomsController)
-app.get("/room/:roomNum", getOneRoomController)
-app.delete("/room/:roomNum", deleteRoomController)
+const userRouter = express.Router()
+userRouter
+    .get("/get/all", async (req, res) => {
+        const user = await User.find({});
+        res.json(user);
+    })
+    .post("/register", registerController)
+    .post("login", loginController)
+    .get("/get/:id", getCustomer)
+    .delete("/delete/:id", deleteCustomer)
+    .put("/update/:id", updateCustomer)
 
 //BOOKING ROUTES
-app.post("/create/booking", createBookingController)
+const bookRouter = express.Router()
+bookRouter
+    .post("/create", createBookingController)
 
-/// FOR HANDING ROOM CREATION WITH JWT 
-const rommRouter = express.Router();
+/// FOR HANDING ROOM CREATION WITH AND WITHOUT JWT 
+const roomRouter = express.Router();
+roomRouter
+    .post("/create", restrict, createRoomController)
+    .get("/get/all", restrict, getAllRoomsController)
+    .get("/get/:roomNum", restrict, getOneRoomController)
+    .delete("/delete/:roomNum", restrict, deleteRoomController);
 
-rommRouter
-    .post("/", restrict, createRoomController)
-    .get("/all", restrict, getAllRoomsController)
-    .get("/:roomNum", restrict, getOneRoomController)
-    .delete("/:roomNum", restrict, deleteRoomController);
-
-app.use("/room", rommRouter);
+app.use("/room", roomRouter);
+app.use("/user", userRouter)
+app.use("/book", bookRouter)

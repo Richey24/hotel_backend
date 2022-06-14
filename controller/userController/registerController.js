@@ -1,4 +1,4 @@
-const { User } = require("../schema");
+const { User } = require("../../schema");
 const jwt = require("jsonwebtoken");
 
 const registerController = async (req, res) => {
