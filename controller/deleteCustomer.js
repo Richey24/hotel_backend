@@ -9,4 +9,4 @@ const deleteCustomer = async (req, res) => {
     }
 }
 
-module.exports = deleteCustomer
+module.exports = deleteCustomer;
