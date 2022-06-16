@@ -25,16 +25,17 @@ const createServiceController = require("./controller/serviceService/create");
 const getAllServiceController = require("./controller/serviceService/getAll");
 const getOneServiceController = require("./controller/serviceService/getOne");
 const editOneServiceController = require("./controller/serviceService/editOne");
+const cors = require("cors")
 const app = express();
 
 //dotenv
 dotenv.config({ path: "./.env" });
 
 app.use(express.json());
+app.use(cors())
 const port = process.env.PORT || 5000;
 
-const url =
-  "mongodb+srv://richey:Rejoice11@cluster0.uq2iuaj.mongodb.net/hotel?retryWrites=true&w=majority";
+const url = "mongodb+srv://richey:Rejoice11@cluster0.uq2iuaj.mongodb.net/hotel?retryWrites=true&w=majority";
 
 const start = () => {
   try {
