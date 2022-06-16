@@ -108,7 +108,7 @@ const Booking = mongoose.model(
 const Services = mongoose.model(
   "Service",
   new mongoose.Schema({
-    booking: { type: mongoose.Schema.Types.ObjectId, ref: "Booking" },
+    bookings: { type: mongoose.Schema.Types.ObjectId, ref: "Booking" },
     status: {
       type: String,
       required: true,
@@ -120,8 +120,6 @@ const Services = mongoose.model(
   }),
   "service"
 );
-Services.set("toObject", { virtuals: true });
-Services.set("toJSON", { virtuals: true });
 
 module.exports = {
   User,

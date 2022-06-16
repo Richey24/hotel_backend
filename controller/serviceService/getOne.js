@@ -1,12 +1,10 @@
-const { Room } = require("../../schema");
+const { Services } = require("../../schema");
 
-const getOneRoomController = async (req, res) => {
+const getOneServiceController = async (req, res) => {
   // if (req.user) {
   const { id } = req.params;
   try {
-    let request = await Room.findById({
-      id,
-    });
+    let request = await Services.findById(id).populate('bookings')
     res.status(200).json({ status: true, message: "", request });
   } catch (err) {
     res.status(404).json({ status: false, message: err });
@@ -16,4 +14,4 @@ const getOneRoomController = async (req, res) => {
   // }
 };
 
-module.exports = getOneRoomController;
+module.exports = getOneServiceController;

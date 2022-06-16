@@ -10,7 +10,6 @@ const createRoomController = async (req, res) => {
         roomNum,
         isAvailable: isAvailable,
         price,
-        cusId,
         category,
       });
       res

@@ -1,6 +1,6 @@
 const { Services } = require("../../schema");
 
-const editOneRoomController = async (req, res) => {
+const editOneServiceController = async (req, res) => {
   const { id } = req.params;
   try {
     let service = await Services.findByIdAndUpdate(
@@ -15,4 +15,4 @@ const editOneRoomController = async (req, res) => {
 
 };
 
-module.exports = editOneRoomController;
+module.exports = editOneServiceController;
