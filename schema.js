@@ -76,8 +76,8 @@ const Room = mongoose.model(
     },
     bkId: {
       type: String,
-      required: false
-    }
+      required: false,
+    },
   }),
   "room"
 );
@@ -87,11 +87,11 @@ const Booking = mongoose.model(
   new mongoose.Schema({
     checkInDate: {
       type: Date,
-      required: true
+      required: true,
     },
     checkOutDate: {
       type: Date,
-      required: true
+      required: true,
     },
     roomNum: {
       type: Number,
@@ -105,8 +105,27 @@ const Booking = mongoose.model(
   "booking"
 );
 
+const Services = mongoose.model(
+  "Service",
+  new mongoose.Schema({
+    booking: { type: mongoose.Schema.Types.ObjectId, ref: "Booking" },
+    status: {
+      type: String,
+      required: true,
+    },
+    description: {
+      type: String,
+      required: true,
+    },
+  }),
+  "service"
+);
+Services.set("toObject", { virtuals: true });
+Services.set("toJSON", { virtuals: true });
+
 module.exports = {
   User,
   Room,
-  Booking
+  Booking,
+  Services
 };

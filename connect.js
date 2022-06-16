@@ -55,32 +55,44 @@ const restrict = async (req, res, next) => {
 };
 
 app.get("/", (req, res) => res.send("hello"));
+
 //USER ROUTES
-const userRouter = express.Router()
+
+const userRouter = express.Router();
 userRouter
-    .get("/get/all", async (req, res) => {
-        const user = await User.find({});
-        res.json(user);
-    })
-    .post("/register", registerController)
-    .post("login", loginController)
-    .get("/get/:id", getCustomer)
-    .delete("/delete/:id", deleteCustomer)
-    .put("/update/:id", updateCustomer)
+  .get("/get/all", async (req, res) => {
+    const user = await User.find({});
+    res.json(user);
+  })
+  .post("/register", registerController)
+  .post("login", loginController)
+  .get("/get/:id", getCustomer)
+  .delete("/delete/:id", deleteCustomer)
+  .put("/update/:id", updateCustomer);
+
+/// FOR HANDING SERVICE REQUEST CREATION WITH AND WITHOUT JWT
+
+const serviceRouter = express.Router();
+serviceRouter
+  .post("/", createRoomController)
+  .get("/get/all", getAllRoomsController)
+  .get("/get/:id", getOneRoomController)
+  .delete("/delete/:id", deleteRoomController);
 
 //BOOKING ROUTES
-const bookRouter = express.Router()
-bookRouter
-    .post("/create", createBookingController)
 
-/// FOR HANDING ROOM CREATION WITH AND WITHOUT JWT 
+const bookRouter = express.Router();
+bookRouter.post("/create", createBookingController);
+
+/// FOR HANDING ROOM CREATION WITH AND WITHOUT JWT
 const roomRouter = express.Router();
 roomRouter
-    .post("/create", restrict, createRoomController)
-    .get("/get/all", restrict, getAllRoomsController)
-    .get("/get/:roomNum", restrict, getOneRoomController)
-    .delete("/delete/:roomNum", restrict, deleteRoomController);
+  .post("/create", createRoomController)
+  .get("/get/all", getAllRoomsController)
+  .get("/get/:roomNum", getOneRoomController)
+  .delete("/delete/:roomNum", deleteRoomController);
 
 app.use("/room", roomRouter);
-app.use("/user", userRouter)
-app.use("/book", bookRouter)
+app.use("/user", userRouter);
+app.use("/book", bookRouter);
+app.use("/service-request", serviceRouter);
