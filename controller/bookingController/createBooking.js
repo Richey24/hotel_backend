@@ -2,6 +2,11 @@ const { Room, Booking } = require('../../schema')
 
 const createBookingController = async (req, res) => {
     const { checkInDate, checkOutDate, roomNum, cusId } = req.body
+    const check = await Room.findOne({ roomNum: roomNum })
+    if (check.isAvailable === false) {
+        res.status(201).json({ message: "Room is already taken" })
+        return
+    }
     if (checkInDate && checkOutDate && roomNum && cusId) {
         req.body.checkInDate = new Date(checkInDate)
         req.body.checkOutDate = new Date(checkOutDate)

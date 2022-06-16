@@ -16,6 +16,11 @@ const updateCustomer = require("./controller/userController/updateCustomer");
 const createBookingController = require("./controller/bookingController/createBooking");
 const getAvailableRoomsController = require("./controller/roomController/getAvailable");
 const editOneRoomController = require("./controller/roomController/editOne");
+const updateBookingController = require("./controller/bookingController/updateBooking");
+const removeBookingController = require("./controller/bookingController/removeBooking");
+const refreshController = require("./controller/bookingController/refreshController");
+const getAllBookingController = require("./controller/bookingController/getAllBooking");
+const getOneBookingController = require("./controller/bookingController/getOneBooking");
 const app = express();
 
 //dotenv
@@ -49,7 +54,7 @@ const restrict = async (req, res, next) => {
     const decode = await promisify(jwt.verify)(token, process.env.TOKEN_KEY);
     const user = await User.findById(decode.id);
     req.user = user;
-  } catch (err) {}
+  } catch (err) { }
 
   next();
 };
@@ -58,28 +63,34 @@ app.get("/", (req, res) => res.send("hello"));
 //USER ROUTES
 const userRouter = express.Router()
 userRouter
-    .get("/get/all", async (req, res) => {
-        const user = await User.find({});
-        res.json(user);
-    })
-    .post("/register", registerController)
-    .post("login", loginController)
-    .get("/get/:id", getCustomer)
-    .delete("/delete/:id", deleteCustomer)
-    .put("/update/:id", updateCustomer)
+  .get("/get/all", async (req, res) => {
+    const user = await User.find({});
+    const count = await User.count({})
+    res.json({ count: count, user });
+  })
+  .post("/register", registerController)
+  .post("login", loginController)
+  .get("/get/:id", getCustomer)
+  .delete("/delete/:id", deleteCustomer)
+  .put("/update/:id", updateCustomer)
 
 //BOOKING ROUTES
 const bookRouter = express.Router()
 bookRouter
-    .post("/create", createBookingController)
+  .get("/get/all", getAllBookingController)
+  .get("/get/:cusId", getOneBookingController)
+  .post("/create", createBookingController)
+  .put("/update/:id", updateBookingController)
+  .delete("/remove/:id", removeBookingController)
+  .get("/refresh", refreshController)
 
 /// FOR HANDING ROOM CREATION WITH AND WITHOUT JWT 
 const roomRouter = express.Router();
 roomRouter
-    .post("/create", restrict, createRoomController)
-    .get("/get/all", restrict, getAllRoomsController)
-    .get("/get/:roomNum", restrict, getOneRoomController)
-    .delete("/delete/:roomNum", restrict, deleteRoomController);
+  .post("/create", createRoomController)
+  .get("/get/all", getAllRoomsController)
+  .get("/get/:roomNum", getOneRoomController)
+  .delete("/delete/:roomNum", deleteRoomController);
 
 app.use("/room", roomRouter);
 app.use("/user", userRouter)
