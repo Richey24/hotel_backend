@@ -110,4 +110,4 @@ roomRouter
 app.use("/room", roomRouter);
 app.use("/user", userRouter);
 app.use("/book", bookRouter);
-app.use("/service-request", serviceRouter);
+app.use("/service", serviceRouter);
