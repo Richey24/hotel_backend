@@ -6,9 +6,9 @@ const loginController = async (req, res) => {
   if (user) {
     let validate = user.password === req.body.password;
     if (validate) {
-      const { password, ...mainUser } = user._doc
-      if (user.role === "0") user.role = "Employee";
-      if (user.role === "1") user.role = "Customer";
+      const { password, ...mainUser } = user._doc;
+      if (mainUser.role === "0") mainUser.role = "Employee";
+      if (mainUser.role === "1") mainUser.role = "Customer";
       //signing jwt
       // const token = jwt.sign({ id: user._id }, process.env.TOKEN_KEY, {
       //   expiresIn: "90d",
