@@ -33,7 +33,7 @@ dotenv.config({ path: "./.env" });
 
 app.use(express.json());
 app.use(cors());
-const port = process.env.PORT || 5000;
+const port = process.env.PORT || 5001;
 
 const url =
   "mongodb+srv://richey:Rejoice11@cluster0.uq2iuaj.mongodb.net/hotel?retryWrites=true&w=majority";
@@ -73,6 +73,10 @@ const userRouter = express.Router();
 userRouter
   .get("/get/all", async (req, res) => {
     const user = await User.find({});
+    for (let i = 0; i < user.length; i++) {
+      if (user[i].role === "0") user[i].role = "Employee";
+      if (user[i].role === "1") user[i].role = "Customer";
+    }
     const count = await User.count({});
     res.json({ count: count, user });
   })
