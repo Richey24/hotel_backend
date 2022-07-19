@@ -14,8 +14,6 @@ const getCustomer = require("./controller/userController/getCustomer");
 const deleteCustomer = require("./controller/userController/deleteCustomer");
 const updateCustomer = require("./controller/userController/updateCustomer");
 const createBookingController = require("./controller/bookingController/createBooking");
-const getAvailableRoomsController = require("./controller/roomController/getAvailable");
-const editOneRoomController = require("./controller/roomController/editOne");
 const updateBookingController = require("./controller/bookingController/updateBooking");
 const removeBookingController = require("./controller/bookingController/removeBooking");
 const refreshController = require("./controller/bookingController/refreshController");
@@ -35,12 +33,9 @@ app.use(express.json());
 app.use(cors());
 const port = process.env.PORT || 5001;
 
-const url =
-  "mongodb+srv://richey:Rejoice11@cluster0.uq2iuaj.mongodb.net/hotel?retryWrites=true&w=majority";
-
 const start = () => {
   try {
-    mongoose.connect(url, {
+    mongoose.connect(process.env.MONGODB_URL, {
       useNewUrlParser: true,
       useUnifiedTopology: true,
     });
