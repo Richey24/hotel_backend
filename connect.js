@@ -27,7 +27,7 @@ const cors = require("cors");
 const app = express();
 
 //dotenv
-dotenv.config({ path: "./.env" });
+dotenv.config({ path: "./environ/.env" });
 
 app.use(express.json());
 app.use(cors());
