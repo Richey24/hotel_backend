@@ -15,7 +15,7 @@ const loginController = async (req, res) => {
       // });
       res.status(200).json(mainUser);
     } else {
-      res.status(201).json({ message: "incorrect password" });
+      res.status(203).json({ message: "incorrect password" });
     }
   } else {
     res.status(404).json({ message: "no user found with this email" });
