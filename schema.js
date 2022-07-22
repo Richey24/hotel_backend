@@ -27,16 +27,12 @@ const User = mongoose.model(
       type: String,
       required: false,
     },
-    city: {
+    dob: {
       type: String,
       required: false,
     },
-    state: {
+    gender: {
       type: String,
-      required: false,
-    },
-    zip: {
-      type: Number,
       required: false,
     },
     email: {
@@ -125,5 +121,5 @@ module.exports = {
   User,
   Room,
   Booking,
-  Services
+  Services,
 };
