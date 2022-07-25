@@ -7,7 +7,12 @@ const registerController = async (req, res) => {
     return;
   }
 
-  let check = await User.findOne({ username: req.body.username });
+  if (!req.body.name) {
+    res.status(203).json({ message: "please input name" });
+    return;
+  }
+
+  let check = await User.findOne({ email: req.body.email });
   if (!check) {
     let user = await User.create(req.body);
     const { password, ...mainUser } = user._doc;

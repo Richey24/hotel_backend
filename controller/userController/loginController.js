@@ -2,7 +2,7 @@ const { User } = require("../../schema");
 const jwt = require("jsonwebtoken");
 
 const loginController = async (req, res) => {
-  let user = await User.findOne({ username: req.body.username });
+  let user = await User.findOne({ email: req.body.email });
   if (user) {
     let validate = user.password === req.body.password;
     if (validate) {
