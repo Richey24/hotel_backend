@@ -91,11 +91,15 @@ const Booking = mongoose.model(
     },
     roomNum: {
       type: Number,
-      required: true,
+      required: false,
     },
     cusId: {
       type: String,
-      required: true,
+      required: false,
+    },
+    cost: {
+      type: String,
+      required: false,
     },
   }),
   "booking"
