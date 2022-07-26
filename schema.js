@@ -97,6 +97,10 @@ const Booking = mongoose.model(
       type: String,
       required: false,
     },
+    category: {
+      type: String,
+      required: false,
+    },
     cost: {
       type: String,
       required: false,
