@@ -4,7 +4,7 @@ const deleteRoomController = async (req, res) => {
   // if (req.user) {
   const { roomNum } = req.params;
   if (roomNum) {
-    Room.findOneAndDelete({ roomNum })
+    Room.findByIdAndDelete(roomNum)
       .then(() => {
         res.status(200).json({ status: true, message: "Room deleted!" });
       })
