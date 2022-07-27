@@ -24,6 +24,7 @@ const getAllServiceController = require("./controller/serviceService/getAll");
 const getOneServiceController = require("./controller/serviceService/getOne");
 const editOneServiceController = require("./controller/serviceService/editOne");
 const cors = require("cors");
+const deleteService = require("./controller/serviceService/deleteService");
 const app = express();
 
 //dotenv
@@ -31,7 +32,7 @@ dotenv.config({ path: "./environ/.env" });
 
 app.use(express.json());
 app.use(cors());
-const port = process.env.PORT || 5001;
+const port = process.env.PORT || 5000;
 
 try {
   mongoose.connect(process.env.MONGODB_URL, {
@@ -84,7 +85,8 @@ serviceRouter
   .post("/create", createServiceController)
   .get("/get/all", getAllServiceController)
   .get("/get/:id", getOneServiceController)
-  .put("/update/:id", editOneServiceController);
+  .put("/update/:id", editOneServiceController)
+  .delete("/delete/:id", deleteService);
 
 //BOOKING ROUTES
 const bookRouter = express.Router();
