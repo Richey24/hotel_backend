@@ -112,7 +112,6 @@ const Booking = mongoose.model(
 const Services = mongoose.model(
   "Service",
   new mongoose.Schema({
-    bookings: { type: mongoose.Schema.Types.ObjectId, ref: "Booking" },
     status: {
       type: String,
       required: true,
@@ -120,6 +119,14 @@ const Services = mongoose.model(
     description: {
       type: String,
       required: true,
+    },
+    roomNum: {
+      type: String,
+      required: false,
+    },
+    date: {
+      type: String,
+      required: false,
     },
   }),
   "service"
