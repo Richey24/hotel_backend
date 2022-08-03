@@ -74,37 +74,37 @@ userRouter
   })
   .post("/register", registerController)
   .post("/login", loginController)
-  .get("/get/:id", getCustomer)
-  .delete("/delete/:id", deleteCustomer)
+  .get("/get/:id", restrict, getCustomer)
+  .delete("/delete/:id", restrict, deleteCustomer)
   .put("/update/:id", updateCustomer);
 
 /// FOR HANDING SERVICE REQUEST CREATION WITH AND WITHOUT JWT
 
 const serviceRouter = express.Router();
 serviceRouter
-  .post("/create", createServiceController)
-  .get("/get/all", getAllServiceController)
-  .get("/get/:id", getOneServiceController)
-  .put("/update/:id", editOneServiceController)
-  .delete("/delete/:id", deleteService);
+  .post("/create", restrict, createServiceController)
+  .get("/get/all", restrict, getAllServiceController)
+  .get("/get/:id", restrict, getOneServiceController)
+  .put("/update/:id", restrict, editOneServiceController)
+  .delete("/delete/:id", restrict, deleteService);
 
 //BOOKING ROUTES
 const bookRouter = express.Router();
 bookRouter
-  .get("/get/all", getAllBookingController)
-  .get("/get/:cusId", getOneBookingController)
-  .post("/create", createBookingController)
-  .put("/update/:id", updateBookingController)
-  .delete("/remove/:id", removeBookingController)
-  .get("/refresh", refreshController);
+  .get("/get/all", restrict, getAllBookingController)
+  .get("/get/:cusId", restrict, getOneBookingController)
+  .post("/create", restrict, createBookingController)
+  .put("/update/:id", restrict, updateBookingController)
+  .delete("/remove/:id", restrict, removeBookingController)
+  .get("/refresh", restrict, refreshController);
 
 /// FOR HANDING ROOM CREATION WITH AND WITHOUT JWT
 const roomRouter = express.Router();
 roomRouter
-  .post("/create", createRoomController)
-  .get("/get/all", getAllRoomsController)
-  .get("/get/:roomNum", getOneRoomController)
-  .delete("/delete/:roomNum", deleteRoomController);
+  .post("/create", restrict, createRoomController)
+  .get("/get/all", restrict, getAllRoomsController)
+  .get("/get/:roomNum", restrict, getOneRoomController)
+  .delete("/delete/:roomNum", restrict, deleteRoomController);
 
 app.use("/room", roomRouter);
 app.use("/user", userRouter);
