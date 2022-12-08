@@ -35,8 +35,8 @@ app.use(cors());
 const port = process.env.PORT || 5000;
 
 try {
-  mongoose.connect(process.env.MONGODB_URL, {
-    useNewUrlParser: true,        
+  mongoose.connect(`mongodb+srv://richey:Rejoice11@cluster0.uq2iuaj.mongodb.net/hotel?retryWrites=true`, {
+    useNewUrlParser: true,
     useUnifiedTopology: true,
   });
   app.listen(port, () => console.log(`listening at ${port}`));
@@ -52,7 +52,7 @@ const restrict = async (req, res, next) => {
     const decode = await promisify(jwt.verify)(token, process.env.TOKEN_KEY);
     const user = await User.findById(decode.id);
     req.user = user;
-  } catch (err) {}
+  } catch (err) { }
 
   next();
 };
