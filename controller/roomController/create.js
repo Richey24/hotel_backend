@@ -19,7 +19,7 @@ const createRoomController = async (req, res) => {
       res.status(400).json({ status: false, message: err });
     }
   } else {
-    res.status(403).json({ message: "already created" });
+    res.status(419).json({ message: "already created" });
   }
   // } else {
   // res.status(401).json({ status: false, message: "unauthorized access" });
