@@ -1,4 +1,0 @@
-{
-    "appService.defaultWebAppToDeploy": "/subscriptions/e2f4d929-a827-41d2-8316-3146ce21ffda/AppServices/subscriptions/e2f4d929-a827-41d2-8316-3146ce21ffda/resourceGroups/appsvc_linux_centralus_premium/providers/Microsoft.Web/sites/hotel-backend",
-    "appService.deploySubpath": "."
-}
